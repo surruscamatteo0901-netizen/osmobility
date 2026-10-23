@@ -177,6 +177,7 @@ footer a{color:var(--fg)}
 <div><label for="nom">Nom</label><input id="nom" autocomplete="name" required></div>
 <div><label for="tel">Téléphone</label><input id="tel" type="tel" autocomplete="tel" required></div>
 <div><label for="veh">Véhicule (marque, modèle, année)</label><input id="veh" placeholder="Renault Clio 2016"></div>
+<div><label for="immat">Immatriculation</label><input id="immat" placeholder="AB-123-CD" autocomplete="off" autocapitalize="characters" style="text-transform:uppercase" required></div>
 <div><label for="svc">Besoin</label><select id="svc"><option>Entretien / révision</option><option>Freinage</option><option>Diagnostic électronique</option><option>Dépannage</option><option>Autre mécanique</option></select></div>
 <div><label for="ville">Commune</label><input id="ville" autocomplete="address-level2"></div>
 <div><label for="date">Date souhaitée</label><input id="date" type="date"></div>
@@ -214,8 +215,8 @@ if(!rm){van.style.transform='translate3d('+(p*innerWidth*1.1)+'px,0,0)';var dg=d
 addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(go)}},{passive:true});
 document.getElementById('fl').src=document.getElementById('hl').src;
 var $=function(i){return document.getElementById(i)};
-function msg(){var l=['Bonjour, je souhaite un rendez-vous.','Nom : '+$('nom').value,'Téléphone : '+$('tel').value,'Véhicule : '+$('veh').value,'Besoin : '+$('svc').value,'Commune : '+$('ville').value,'Date souhaitée : '+$('date').value,'Message : '+$('msg').value];return l.join('\n')}
-function ok(){if(!$('nom').value.trim()||!$('tel').value.trim()){$('err').textContent='Indiquez votre nom et votre numéro de téléphone pour que je puisse vous rappeler.';return false}$('err').textContent='';return true}
+function msg(){var l=['Bonjour, je souhaite un rendez-vous.','Nom : '+$('nom').value,'Téléphone : '+$('tel').value,'Véhicule : '+$('veh').value,'Immatriculation : '+$('immat').value.toUpperCase(),'Besoin : '+$('svc').value,'Commune : '+$('ville').value,'Date souhaitée : '+$('date').value,'Message : '+$('msg').value];return l.join('\n')}
+function ok(){if(!$('nom').value.trim()||!$('tel').value.trim()||!$('immat').value.trim()){$('err').textContent='Indiquez votre nom, votre téléphone et l’immatriculation du véhicule pour que je puisse préparer l’intervention.';return false}$('err').textContent='';return true}
 $('wa').onclick=function(){if(ok())window.open('https://wa.me/33668223546?text='+encodeURIComponent(msg()),'_blank')};
 $('ml').onclick=function(){if(ok())location.href='mailto:osmobility1010@gmail.com?subject='+encodeURIComponent('Demande de rendez-vous')+'&body='+encodeURIComponent(msg())};
 </script>
